@@ -1,0 +1,1135 @@
+/*
+  TASMAC Ledger — stylesheet.
+
+  Written by hand, mobile-first. The premise is a bound government stock register
+  that happens to update every twenty minutes: warm paper, oxblood and brass,
+  hairline rules doing the work borders and shadows usually do, and tabular
+  figures throughout, because every screen here is a column of numbers.
+
+  Structure: tokens → reset → type → layout utilities → components → responsive.
+  Breakpoints are only ever min-width; phone layout is the base case, never an
+  override.
+*/
+
+/* ── tokens ───────────────────────────────────────────────────── */
+
+:root {
+  --paper: #f2ede1;
+  --paper-2: #e9e2d2;
+  --paper-3: #ded5c1;
+  --ink: #17140f;
+  --ink-2: #4a4336;
+  --ink-3: #7c7361;
+  --rule: #cdc3ab;
+  --rule-soft: #ded6c4;
+  --oxblood: #7d1f2a;
+  --oxblood-2: #a8323c;
+  --brass: #9a6b1e;
+  --brass-2: #c99a3c;
+  --verdigris: #2f6b5c;
+  --flag: #1c4f7c;
+  --grain: 0.36;
+
+  /* Liquor categories. A validated categorical set (colour-blind separation and
+     a normal-vision floor between every pair that sits side by side in a
+     stack), in the stack order the charts use: brandy, rum, vodka, beer, wine,
+     gin, whisky. The ledger tones above are too close in pairs (brass/brass-2,
+     oxblood/oxblood-2) to tell seven series apart. */
+  --cat-brandy: #2a78d6;
+  --cat-rum: #eb6834;
+  --cat-vodka: #1baf7a;
+  --cat-beer: #eda100;
+  --cat-wine: #e87ba4;
+  --cat-gin: #008300;
+  --cat-whisky: #4a3aa7;
+  --cat-other: #8f8778;
+  /* Sequential (magnitude) ramp: one hue, light → dark. */
+  --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec; --seq-4: #3987e5;
+  --seq-5: #256abf; --seq-6: #184f95; --seq-7: #0d366b;
+  /* Festival tracker: crimson for the festival, ink for the ordinary day it is
+     held against — neither is a category hue (same crimson as the posters). */
+  --fest: #ac3941;
+  --fseq-1: #e59292; --fseq-2: #d47476; --fseq-3: #c2555a; --fseq-4: #ac3941;
+  --fseq-5: #8e252f; --fseq-6: #6e1721; --fseq-7: #4f0913;
+
+  /* Noto Sans Tamil sits after the Latin faces in every stack, so it only ever
+     supplies the glyphs they lack. Latin keeps Plex; Tamil stops being boxes on
+     devices with no Tamil font installed. */
+  --font-display: var(--font-display-src), 'Iowan Old Style', Georgia, var(--font-tamil-src), serif;
+  --font-sans: var(--font-sans-src), ui-sans-serif, system-ui, var(--font-tamil-src), sans-serif;
+  --font-mono: var(--font-mono-src), ui-monospace, 'SF Mono', var(--font-tamil-src), monospace;
+
+  --gutter: 16px;
+  --bar-h: 54px;
+  /* Measured by the masthead at runtime; the sticky ledger headings park
+     directly beneath it, so a guess here would either overlap or leave a gap. */
+  --masthead-h: 54px;
+  color-scheme: light;
+}
+
+/* The dark counterpart is the same ledger under a desk lamp: ink ground, bone
+   type, brass warmed up so it still reads as metal rather than yellow. */
+:root[data-theme='dark'] {
+  --paper: #12100c;
+  --paper-2: #1a1712;
+  --paper-3: #232019;
+  --ink: #ece5d6;
+  --ink-2: #b3aa97;
+  --ink-3: #837a68;
+  --rule: #353026;
+  --rule-soft: #262219;
+  --oxblood: #d4565f;
+  --oxblood-2: #e0717a;
+  --brass: #cfa14e;
+  --brass-2: #e0bb72;
+  --verdigris: #5fae99;
+  --flag: #6aa5d8;
+  --grain: 0.2;
+  --cat-brandy: #3987e5;
+  --cat-rum: #d95926;
+  --cat-vodka: #199e70;
+  --cat-beer: #c98500;
+  --cat-wine: #d55181;
+  --cat-gin: #008300;
+  --cat-whisky: #9085e9;
+  --cat-other: #7c7468;
+  /* On the dark ground "near zero" recedes toward the surface, so the ramp runs dark → light. */
+  --seq-1: #0d366b; --seq-2: #184f95; --seq-3: #1c5cab; --seq-4: #2a78d6;
+  --seq-5: #5598e7; --seq-6: #86b6ef; --seq-7: #b7d3f6;
+  --fest: #e0717a;
+  --fseq-1: #8a2531; --fseq-2: #a3313d; --fseq-3: #b9424d; --fseq-4: #cc5962;
+  --fseq-5: #dc757d; --fseq-6: #e99aa0; --fseq-7: #f5c3c6;
+  color-scheme: dark;
+}
+
+/* ── reset ────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; border: 0 solid var(--rule); }
+* { margin: 0; padding: 0; }
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; cursor: pointer; }
+input, select { font: inherit; color: inherit; background: none; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+table { border-collapse: collapse; width: 100%; }
+
+/* Paper tooth — a fine noise so large empty areas do not read as flat cream. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+:root[data-theme='dark'] body::before { mix-blend-mode: screen; }
+
+::selection { background: var(--brass-2); color: #17140f; }
+
+:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; }
+
+/* ── type ─────────────────────────────────────────────────────── */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'zero' 1;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.t-xs { font-size: 11px; }
+.t-sm { font-size: 12px; }
+.t-md { font-size: 13px; }
+.t-lg { font-size: 16px; }
+
+.dim { color: var(--ink-2); }
+.dim-2 { color: var(--ink-3); }
+.ox { color: var(--oxblood); }
+.br { color: var(--brass); }
+.vd { color: var(--verdigris); }
+.med { font-weight: 500; }
+
+.h1 { font-family: var(--font-display); font-weight: 400; line-height: 0.98; letter-spacing: -0.02em; font-size: clamp(38px, 11vw, 96px); }
+.h2 { font-family: var(--font-display); font-weight: 400; line-height: 1; font-size: clamp(22px, 6vw, 30px); }
+.h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; font-size: clamp(18px, 4.6vw, 22px); }
+
+.measure { max-width: 60ch; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.nowrap { white-space: nowrap; }
+.tab-r { text-align: right; }
+
+/* ── layout utilities ─────────────────────────────────────────── */
+
+.container { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: var(--gutter); }
+
+.row { display: flex; align-items: center; }
+.row-b { display: flex; align-items: baseline; }
+.row-s { display: flex; align-items: flex-start; }
+.row-e { display: flex; align-items: flex-end; }
+.col { display: flex; flex-direction: column; }
+.between { justify-content: space-between; }
+.wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; min-width: 0; }
+.shrink-0 { flex-shrink: 0; }
+.min0 { min-width: 0; }
+
+.g-1 { gap: 4px; }
+.g-2 { gap: 8px; }
+.g-3 { gap: 12px; }
+.g-4 { gap: 16px; }
+.g-6 { gap: 24px; }
+.g-8 { gap: 32px; }
+
+.grid { display: grid; }
+.gc-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gc-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gc-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; } .mt-8 { margin-top: 32px; }
+.mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; } .mb-8 { margin-bottom: 32px; }
+.pt-4 { padding-top: 16px; } .pt-6 { padding-top: 24px; } .pt-8 { padding-top: 32px; }
+.pb-4 { padding-bottom: 16px; } .pb-6 { padding-bottom: 24px; } .pb-8 { padding-bottom: 32px; }
+.p-3 { padding: 12px; } .p-4 { padding: 16px; }
+
+.section { margin-bottom: 40px; }
+
+/* ── rules ────────────────────────────────────────────────────── */
+
+.rule-t { border-top: 1px solid var(--rule); }
+.rule-b { border-bottom: 1px solid var(--rule); }
+.rule-l { border-left: 1px solid var(--rule); }
+.rule-r { border-right: 1px solid var(--rule); }
+.rule-soft-b { border-bottom: 1px solid var(--rule-soft); }
+.rule-double { border-top: 3px double var(--rule); }
+
+/* ── scroll containers ────────────────────────────────────────── */
+
+.wrap-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.scroll-y { overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+.wrap-x::-webkit-scrollbar, .scroll-y::-webkit-scrollbar { height: 4px; width: 4px; }
+.wrap-x::-webkit-scrollbar-thumb, .scroll-y::-webkit-scrollbar-thumb { background: var(--rule); }
+
+/* ── ledger table ─────────────────────────────────────────────── */
+
+table.ledger thead th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+  background: var(--paper);
+}
+table.ledger tbody td {
+  padding: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: baseline;
+}
+table.ledger tbody tr:last-child td { border-bottom: 0; }
+table.ledger .r { text-align: right; }
+@media (hover: hover) {
+  table.ledger tbody tr:hover td { background: var(--paper-2); }
+}
+
+/*
+  Frozen headings — see the rule in the 900px block below.
+
+  `position: sticky` resolves against the nearest scroll container, not the page,
+  and `overflow-x: auto` makes an element a scroll container on *both* axes. So a
+  heading inside a horizontal scroller does not freeze against the window at all:
+  it freezes against the scroller, and rides down the page pinned partway through
+  its own table. Which means the heading can only be sticky where the wrapper has
+  been taken back out of the scrolling business — and that is the one place the
+  rule is applied.
+*/
+
+/* The sortable heading itself: a link filling the cell, with its arrow. */
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: inherit;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.th-sort:hover { color: var(--ink); }
+.th-sort[data-on] { color: var(--oxblood); }
+.r > .th-sort { flex-direction: row-reverse; }
+
+.th-arrow {
+  font-size: 9px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.th-sort:hover .th-arrow { opacity: 0.55; }
+.th-sort[data-on] .th-arrow { opacity: 1; }
+/* Touch has no hover, so the hint has to be permanently visible there. */
+@media (hover: none) {
+  .th-arrow { opacity: 0.35; }
+}
+
+/* Sort control for the stacked phone records, which have no heading row. */
+.sort-bar { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.sort-bar::-webkit-scrollbar { display: none; }
+
+/* ── progressive reveal ───────────────────────────────────────── */
+
+.lazy-sentinel { padding: 20px 0; text-align: center; }
+.lazy-sentinel-row td { padding: 20px 10px !important; text-align: center; }
+.lazy-sentinel .label,
+.lazy-sentinel-row .label { animation: pulse 1.4s ease-in-out infinite; }
+
+@keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.8; } }
+
+/* Skeleton rows, shown while a route segment streams in. */
+.skeleton {
+  background: linear-gradient(90deg, var(--rule-soft) 25%, var(--paper-2) 50%, var(--rule-soft) 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s linear infinite;
+  height: 12px;
+}
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton, .lazy-sentinel .label, .lazy-sentinel-row .label { animation: none; }
+}
+
+/*
+  On phones a wide ledger is unreadable however you scroll it, so the same data
+  is emitted twice in the markup: a table for wide screens and a stacked list of
+  records for narrow ones. Only one is ever in the layout.
+*/
+.only-wide { display: none; }
+.only-narrow { display: block; }
+
+.record {
+  display: block;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.record:last-child { border-bottom: 0; }
+.record-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.record-title { font-size: 13.5px; line-height: 1.35; min-width: 0; }
+.record-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; }
+.record-field { display: flex; align-items: baseline; gap: 5px; }
+.record-field > .k {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.record-field > .v { font-family: var(--font-mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+/* ── controls ─────────────────────────────────────────────────── */
+
+.field {
+  background: transparent;
+  border: 1px solid var(--rule);
+  padding: 9px 11px;
+  font-family: var(--font-mono);
+  font-size: 16px; /* 16px stops iOS zooming the page on focus */
+  color: var(--ink);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+.field:focus { border-color: var(--oxblood); }
+.field::placeholder { color: var(--ink-3); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 11px;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  white-space: nowrap;
+  min-height: 34px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip:hover { border-color: var(--ink-2); color: var(--ink); }
+.chip[data-on='true'] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+/* The flag is the whole control, so the chip loses its text padding and keeps
+   only enough to stay a comfortable tap target. */
+.lang-chip { padding: 7px 8px; min-width: 38px; justify-content: center; }
+.lang-chip[data-pending] { opacity: 0.5; }
+.lang-chip svg { border: 1px solid var(--rule); }
+
+/* ── district scope ───────────────────────────────────────────────
+   The picker sits inside the kicker line and has to read as part of that
+   sentence, so it inherits the line's type and only adds the underline and
+   caret that mark it as operable. */
+
+/* A category tag that leads somewhere. Deliberately undecorated — it should sit
+   in the table looking exactly like the ones that do not, and only admit to
+   being a link when a pointer is on it. Touch gets no hover state and needs
+   none; the whole tag is the target. */
+.cat-link { cursor: pointer; transition: color 0.15s; }
+.cat-link:hover { color: var(--oxblood); }
+
+/* The helpline is a `tel:` link. Underlined because a number you can dial
+   should look like one; the colour is already the oxblood of the text it sits
+   in, so this is the only mark it needs. */
+.helpline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.scope-pick { position: relative; display: inline-block; }
+
+.scope-trigger {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--oxblood);
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s, color 0.15s;
+}
+.scope-trigger:hover { color: var(--oxblood-2); }
+.scope-trigger[data-pending] { opacity: 0.55; }
+.scope-caret { transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.scope-trigger[aria-expanded='true'] .scope-caret { transform: rotate(180deg); }
+
+.scope-pop {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: max(200px, 100%);
+  max-height: 292px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.35);
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+  animation: popIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.scope-pop::-webkit-scrollbar { width: 8px; }
+.scope-pop::-webkit-scrollbar-thumb { background: var(--rule); }
+@keyframes popIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+.scope-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 9px 12px;
+  color: var(--ink-2);
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule-soft);
+  /* The trigger sits in the uppercase kicker line and inherits from it, which
+     is right there and wrong here — a list of place names reads as names. */
+  text-transform: none;
+}
+.scope-opt:last-child { border-bottom: 0; }
+/* Hover and keyboard share one highlight, so there is never a second cursor
+   disagreeing with the first about where you are in the list. */
+.scope-opt[data-active] { background: var(--paper-2); color: var(--ink); }
+.scope-opt[data-on] { color: var(--oxblood); }
+.scope-opt-all {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+.scope-opt-all[data-active] { background: var(--paper-2); }
+
+/* The figures the scope changes, dimmed while the next set streams in. The
+   swap is a server round trip, so without this the page looks frozen for the
+   ~100 ms it takes rather than busy. */
+.scope-body { transition: opacity 0.22s ease; }
+.scope-body[data-pending] { opacity: 0.4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scope-pop { animation: none; }
+  .scope-caret { transition: none; }
+}
+
+.chip-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.chip-row::-webkit-scrollbar { display: none; }
+
+.link-ox {
+  color: var(--ink);
+  background-image: linear-gradient(var(--oxblood), var(--oxblood));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.25s ease, color 0.2s;
+}
+@media (hover: hover) {
+  .link-ox:hover { background-size: 100% 1px; color: var(--oxblood); }
+}
+
+/* ── masthead ─────────────────────────────────────────────────── */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+.masthead-inner { display: flex; align-items: center; gap: 10px; height: var(--bar-h); }
+.wordmark { font-family: var(--font-display); font-size: 25px; line-height: 1; }
+.mark { letter-spacing: 0.22em; }
+
+/*
+  Desktop keeps the horizontal rail. Phones get a bottom tab bar instead — the
+  five destinations that matter, within thumb reach, rather than six shrunk-down
+  links crushed into the header.
+*/
+.nav-rail { display: none; }
+
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tabbar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 2px;
+  min-height: 52px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tabbar a[data-on='true'] { color: var(--oxblood); }
+.tabbar .tick { width: 16px; height: 2px; background: transparent; }
+.tabbar a[data-on='true'] .tick { background: var(--oxblood); }
+
+.has-tabbar { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+/* ── search ───────────────────────────────────────────────────── */
+
+.search-wrap { position: relative; flex: 1; min-width: 0; }
+.search-results {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  z-index: 70;
+}
+.search-hit { display: block; width: 100%; text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule-soft); }
+.search-hit:last-child { border-bottom: 0; }
+.search-hit[data-cursor='true'] { background: var(--paper-3); }
+
+/* ── map ──────────────────────────────────────────────────────── */
+
+/* Reserve the map's height up front (it is measured in JS and mounts after
+   hydration) so the ledger below it does not jump — this was a large CLS. The
+   value tracks the map's own height rule: width × 0.72, clamped to 320–560. */
+.map-wrap { position: relative; min-height: clamp(320px, 72vw, 560px); }
+.map-placeholder { min-height: clamp(320px, 72vw, 560px); }
+
+/* Holds the map's place while its code arrives, so the ledger below does not
+   jump down the page when it lands. */
+.map-placeholder {
+  height: min(560px, 72vw);
+  min-height: 320px;
+  background: var(--paper-2);
+}
+
+/* Controls float over live tiles, so each one carries its own paper ground
+   rather than relying on whatever happens to be underneath it. */
+.map-btn {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+}
+
+/*
+  Square icon buttons, deliberately small: they are permanent furniture on a map
+  the reader came to look at, and a labelled chip spends a tenth of the width of
+  a phone saying something its icon already says. 30px still clears the practical
+  floor for a thumb, being isolated targets rather than a dense row.
+*/
+.map-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1;
+  transition: color 0.15s, border-color 0.15s;
+}
+.map-icon:hover { color: var(--ink); border-color: var(--ink-2); }
+.map-icon[data-on] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.map-icon[data-busy] { opacity: 0.5; }
+
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  z-index: 3;
+}
+
+.map-basemaps { position: absolute; top: 10px; left: 10px; z-index: 3; }
+
+/* Opens under its button, sized to its longest label. */
+.map-picker {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 128px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.22);
+}
+.map-picker-item {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 8px 11px;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-soft);
+  white-space: nowrap;
+}
+.map-picker-item:last-child { border-bottom: 0; }
+.map-picker-item:hover { background: var(--paper-2); color: var(--ink); }
+.map-picker-item[data-on] { background: var(--ink); color: var(--paper); }
+
+html[lang='ta'] .map-picker-item { letter-spacing: normal; }
+
+.map-chip { background: var(--paper); padding: 3px 6px; }
+
+/* The key, above the map on the page's own ground rather than floating on the
+   tiles — legible without a backing plate, and it never covers a shop. */
+.map-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  padding: 8px 0 10px;
+}
+
+.map-attribution {
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  z-index: 2;
+  background: var(--paper);
+  padding: 2px 5px;
+}
+
+.map-callout {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 9px 10px;
+  z-index: 4;
+}
+/* The identity line: number, place, and the way out. The place name takes
+   whatever is left and truncates rather than pushing the close button off. */
+.map-callout-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
+/* Actions scroll sideways instead of wrapping into a second and third row —
+   the callout keeps one predictable height whatever the language. */
+.map-callout-actions {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.map-callout-actions::-webkit-scrollbar { display: none; }
+.map-callout-actions .chip { flex-shrink: 0; }
+
+.map-error { position: absolute; bottom: 10px; right: 10px; background: var(--paper); padding: 4px 7px; z-index: 3; }
+
+/* ── figures ──────────────────────────────────────────────────── */
+
+.stat { padding: 14px 16px; }
+.stat-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-size: clamp(24px, 7vw, 40px);
+}
+
+/* The line that sets a figure in context, above it. Sized to sit under the
+   figure's weight rather than compete with it, and allowed to wrap — a full
+   weekday and month runs long, more so in Tamil. */
+.stat-over {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--ink-2);
+  margin-bottom: 4px;
+}
+
+/* ── ring breakdown ───────────────────────────────────────────── */
+
+.ring-wrap {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+}
+.ring-wrap > svg { flex-shrink: 0; }
+
+.ring-total {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  fill: var(--ink);
+}
+
+.ring-key { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.ring-key li {
+  display: grid;
+  grid-template-columns: 9px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+}
+.ring-swatch { width: 9px; height: 9px; display: block; }
+.ring-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.ring-share { font-size: 11.5px; color: var(--ink); }
+.ring-caption { grid-column: 1 / -1; }
+
+html[lang='ta'] .ring-label { letter-spacing: normal; }
+
+/* Under about 420px the ring and its key stop fitting side by side. */
+@media (max-width: 420px) {
+  .ring-wrap { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 14px; }
+  .ring-key { width: 100%; }
+}
+
+.bar-track { height: 3px; width: 100%; background: var(--rule-soft); }
+.bar-fill { height: 100%; background: var(--oxblood); }
+
+/* ── donut ────────────────────────────────────────────────────── */
+
+.donut-wrap { display: grid; grid-template-columns: 140px 1fr; gap: 20px; align-items: center; }
+.donut { width: 140px; height: 140px; }
+.donut-value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  fill: var(--ink);
+}
+.donut-label {
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--ink-3);
+}
+.donut-key { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.donut-key li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.donut-chip { width: 8px; height: 8px; flex-shrink: 0; }
+.donut-name { font-size: 12px; flex: 1; min-width: 0; }
+
+@media (max-width: 560px) {
+  .donut-wrap { grid-template-columns: 1fr; justify-items: center; gap: 16px; }
+  .donut-key { width: 100%; }
+}
+html[lang='ta'] .donut-label { letter-spacing: normal; }
+
+/* ── motion ───────────────────────────────────────────────────── */
+
+@keyframes riseIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes drawX { from { transform: scaleX(0); } to { transform: none; } }
+
+.rise { animation: riseIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+.draw { animation: drawX 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards; transform-origin: left; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .draw { animation: none; }
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* ── Tamil ────────────────────────────────────────────────────── */
+
+/*
+  Undo the Latin tracking.
+
+  The small-caps labels, chips and nav here are set with wide letter-spacing,
+  which is the right treatment for a line of uppercase Latin and the wrong one
+  for Tamil: the script builds letters out of a base glyph plus vowel signs that
+  sit against it, and tracking prises those apart into unrelated marks —
+  "பேரேடு" reads as ே ர ே ு. So for a Tamil page the tracking goes back to
+  normal, and the tightening on the display sizes with it.
+
+  Scoped on the document's own `lang`, which the layout sets from the reader's
+  cookie, so nothing has to be threaded through the components.
+*/
+html[lang='ta'] .label,
+html[lang='ta'] .chip,
+html[lang='ta'] .mark,
+html[lang='ta'] .nav-rail a,
+html[lang='ta'] .tabbar a,
+html[lang='ta'] table.ledger thead th,
+html[lang='ta'] .record-field > .k,
+html[lang='ta'] .scope-trigger,
+html[lang='ta'] .scope-opt,
+html[lang='ta'] .th-sort {
+  letter-spacing: normal;
+}
+
+html[lang='ta'] .h1,
+html[lang='ta'] .h2,
+html[lang='ta'] .h3,
+html[lang='ta'] .display,
+html[lang='ta'] .stat-value {
+  letter-spacing: normal;
+}
+
+/*
+  Tamil needs more room between lines than Latin at the same size — the vowel
+  signs hang above and below the body of the letter — and less size to begin
+  with, because a Tamil word runs considerably wider than its English
+  counterpart. The display sizes are cut back accordingly, and long compounds
+  are allowed to break rather than run off the side of the page.
+*/
+html[lang='ta'] .h1 {
+  font-size: clamp(26px, 7.2vw, 60px);
+  line-height: 1.2;
+}
+html[lang='ta'] .h2 { font-size: clamp(19px, 5vw, 26px); line-height: 1.3; }
+html[lang='ta'] .h3 { font-size: clamp(16px, 4vw, 19px); line-height: 1.3; }
+html[lang='ta'] .label { line-height: 1.6; }
+
+html[lang='ta'] .h1,
+html[lang='ta'] .h2,
+html[lang='ta'] .h3,
+html[lang='ta'] .record-title {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* The figures stay Latin numerals, so they keep their own tracking; only the
+   caption beneath them is Tamil. */
+html[lang='ta'] .stat-value { font-size: clamp(22px, 6.4vw, 36px); }
+
+/* ── responsive ───────────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  :root { --gutter: 24px; }
+  body { font-size: 14px; }
+  .gc-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .field { font-size: 13px; }
+  .sm-row { display: flex; }
+}
+
+@media (min-width: 900px) {
+  :root { --gutter: 32px; --bar-h: 62px; }
+
+  .only-wide { display: block; }
+  .only-narrow { display: none; }
+
+  .tabbar { display: none; }
+  .has-tabbar { padding-bottom: 0; }
+
+  .nav-rail {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    border-top: 1px solid var(--rule);
+    scrollbar-width: none;
+  }
+  .nav-rail::-webkit-scrollbar { display: none; }
+  .nav-rail a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 11px 18px;
+    white-space: nowrap;
+    color: var(--ink-2);
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-rail a:hover { color: var(--ink); background: var(--paper-2); }
+  .nav-rail a[data-on='true'] { background: var(--ink); color: var(--paper); }
+
+  .masthead { border-bottom: 0; }
+  .wordmark { font-size: 30px; }
+
+  .gc-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lg-split { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; align-items: end; }
+  .lg-side { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px; }
+  table.ledger thead th { padding: 8px 12px; }
+  table.ledger tbody td { padding: 9px 12px; }
+  .search-wrap { max-width: 380px; flex: 1; }
+
+  /*
+    The wide ledgers, and only these, hand vertical scrolling back to the page so
+    their heading row can freeze against it. Safe from here up: this is exactly
+    the width at which `.only-wide` takes over from the stacked phone records,
+    and these tables are laid out to fit it.
+
+    Tables in a plain `.wrap-x` — the short summaries on the front page, the
+    price history — keep their horizontal scroller and a static heading. They are
+    a screenful at most, so there is nothing to freeze.
+  */
+  .only-wide.wrap-x { overflow: visible; }
+
+  .only-wide.wrap-x table.ledger thead th {
+    position: sticky;
+    top: var(--masthead-h);
+    z-index: 3;
+    background: var(--paper);
+    /* With the row floating over live data, this hairline is the only thing
+       separating the headings from the row passing beneath them. */
+    box-shadow: 0 1px 0 var(--rule);
+  }
+}
+
+@media (min-width: 1200px) {
+  .stat-value { font-size: 40px; }
+}
+
+/* Cost breakdown — "Where your money goes" */
+.cost-bar { display:flex; width:100%; height:34px; border-radius:2px; overflow:hidden; background:var(--rule-soft); border:1px solid var(--rule-soft); }
+.cost-seg { height:100%; transition:width .5s ease; }
+.cost-key { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.cost-key li { display:flex; align-items:center; gap:10px; }
+.cost-chip { width:10px; height:10px; flex-shrink:0; }
+.cost-name { flex:1; min-width:0; }
+.cost-key .num.med { min-width:64px; text-align:right; }
+
+/* ── /db sales dashboard ──────────────────────────────────────────
+   Cards on the paper ground, one filter row above them all, charts drawn in
+   SVG at real width. Chart chrome is recessive: hairline solid grid, muted
+   axis type; the data carries the colour. */
+
+.db { padding-bottom: 48px; transition: opacity 160ms ease; }
+.db[data-pending] { opacity: 0.55; }
+.db-hero { padding: 28px 0 18px; }
+.db-h1 { font-family: var(--font-display); font-weight: 400; line-height: 1.02; letter-spacing: -0.015em; font-size: clamp(30px, 7vw, 56px); margin-top: 8px; max-width: 22ch; }
+.db-lede { margin-top: 12px; max-width: 72ch; color: var(--ink-2); font-size: 14px; }
+
+.db-controls {
+  position: sticky; top: var(--masthead-h); z-index: 30;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+  padding: 10px 0; background: var(--paper); border-bottom: 1px solid var(--rule);
+}
+.db-field { display: flex; align-items: center; gap: 8px; }
+.db-field select {
+  border: 1px solid var(--rule); padding: 6px 28px 6px 10px; font-size: 13px; background: var(--paper);
+  appearance: none; -webkit-appearance: none; min-width: 180px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-3) 50%), linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 14px) 52%, calc(100% - 9px) 52%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.db-seg { display: inline-flex; border: 1px solid var(--rule); }
+.db-seg button { padding: 6px 12px; font-size: 12px; color: var(--ink-2); }
+.db-seg button + button { border-left: 1px solid var(--rule); }
+.db-seg button[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.db-seg-sm button { padding: 4px 9px; font-size: 11px; }
+
+.db-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 18px 0 22px; }
+.db-tile { background: var(--paper); padding: 14px 14px 12px; min-width: 0; }
+.db-tile-v { font-family: var(--font-sans); font-weight: 600; font-size: clamp(22px, 5.4vw, 30px); line-height: 1.15; margin: 6px 0 2px; letter-spacing: -0.01em; }
+
+.db-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.db-card { background: var(--paper); border: 1px solid var(--rule); padding: 16px; min-width: 0; }
+.db-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.db-h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(19px, 4.4vw, 24px); line-height: 1.12; margin-top: 4px; }
+.db-sub { color: var(--ink-2); font-size: 13px; margin-top: 6px; max-width: 70ch; }
+.db-card-tools { display: flex; gap: 6px; flex-shrink: 0; }
+.db-tool { border: 1px solid var(--rule); padding: 5px 9px; font-size: 11px; color: var(--ink-2); display: inline-flex; align-items: center; gap: 4px; min-height: 28px; }
+.db-tool:hover, .db-tool[aria-pressed='true'] { border-color: var(--ink-2); color: var(--ink); }
+.db-card-body { min-width: 0; }
+.db-card-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.db-scroll { max-height: 560px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+.db-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+
+.db-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 2px 0 10px; font-size: 12px; color: var(--ink-2); }
+.db-legend-i { display: inline-flex; align-items: center; gap: 6px; }
+.db-sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+.db-sw-line { width: 14px; height: 2px; border-radius: 1px; display: inline-block; flex-shrink: 0; }
+
+.db-chart { width: 100%; min-width: 0; }
+.db-svg { display: block; overflow: visible; font-family: var(--font-sans); }
+.db-gl { stroke: var(--rule-soft); stroke-width: 1; }
+.db-base { stroke: var(--rule); stroke-width: 1; }
+.db-axis { fill: var(--ink-3); font-variant-numeric: tabular-nums; }
+.db-val { fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+.db-lab { fill: var(--ink); }
+.db-svg a:hover .db-lab, .db-svg a:hover text { fill: var(--oxblood); text-decoration: underline; }
+.db-inbar { fill: #fff; font-variant-numeric: tabular-nums; pointer-events: none; }
+.db-area { stroke: var(--paper); stroke-width: 1; stroke-linejoin: round; }
+.db-mark { stroke: var(--ink-3); stroke-width: 1; opacity: 0.6; }
+.db-cross { stroke: var(--ink-2); stroke-width: 1; pointer-events: none; }
+.db-ref { stroke: var(--rule); stroke-width: 1; }
+.db-ring { stroke: var(--paper); stroke-width: 2; }
+
+.db-seqkey { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; }
+.db-seqkey-bar { display: inline-flex; height: 8px; width: 140px; }
+.db-seqkey-bar span { flex: 1; }
+
+.db-tip {
+  position: fixed; z-index: 300; pointer-events: none; min-width: 160px; max-width: 300px;
+  background: var(--paper); color: var(--ink); border: 1px solid var(--ink-3);
+  padding: 8px 10px; font-size: 12px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: opacity 80ms ease;
+}
+.db-tip-h { font-weight: 600; margin-bottom: 4px; }
+.db-tip-row { display: flex; align-items: center; gap: 6px; line-height: 1.6; }
+.db-tip-row[data-strong] { font-weight: 600; border-top: 1px solid var(--rule-soft); margin-top: 2px; padding-top: 2px; }
+.db-tip-l { flex: 1; color: var(--ink-2); }
+.db-tip-row[data-strong] .db-tip-l { color: var(--ink); }
+.db-tip-v { text-align: right; }
+
+.db-table-wrap { overflow-x: auto; max-height: 520px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+.db-table { font-size: 12px; }
+.db-table th { position: sticky; top: 0; background: var(--paper); text-align: left; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 400; padding: 6px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.db-table td { padding: 6px 8px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+.db-table [data-num] { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.db-addr { display: block; max-width: 34ch; }
+
+.db-eves { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.db-eve { border-top: 2px solid var(--ink); padding-top: 8px; }
+.db-eve-v { font-weight: 600; font-size: 24px; margin: 4px 0 2px; }
+
+.db-posters { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.db-poster img { width: 100%; height: auto; border: 1px solid var(--rule); background: var(--paper-2); }
+.db-poster figcaption { margin-top: 8px; display: grid; gap: 4px; }
+.db-method p + p { margin-top: 8px; }
+
+@media (min-width: 640px) {
+  .db-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .db-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .db-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .db-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .db-card[data-wide] { grid-column: 1 / -1; }
+  .db-card { padding: 20px; }
+}
+.db-h3 { font-family: var(--font-display); font-weight: 400; font-size: 18px; line-height: 1.15; margin-top: 4px; }
+.db-fest-base { stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.db-fest-future { fill: none; stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 4 3; }
+.db-sources summary { cursor: pointer; }
+.db-sources ul { margin-top: 8px; padding-left: 16px; list-style: disc; display: grid; gap: 4px; }
+.db-eves-wrap { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.db-eves-wrap .db-eves { margin-top: 12px; }
+@media (min-width: 1000px) { .db-method { columns: 2; column-gap: 32px; } .db-method > .label, .db-method > .db-h2 { column-span: all; } }
+/* Tamil runs about half as long again as the English headline; set it smaller. */
+:lang(ta) .db-h1 { font-size: clamp(26px, 5.4vw, 42px); line-height: 1.2; max-width: 28ch; }
+:lang(ta) .db-h2 { font-size: clamp(17px, 3.8vw, 21px); line-height: 1.3; }

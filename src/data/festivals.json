@@ -1,0 +1,395 @@
+{
+  "about": "Festivals the /db tracker follows, and what TASMAC itself has told the press about past Deepavalis. `from`/`to` are the tracked window in days around `day`; `counted` is the span TASMAC usually quotes (the eve and Deepavali itself; a third day when Deepavali falls on a Monday). History figures are crore rupees exactly as reported, never estimated; `perDay` merges the per-day figures of all the year's releases. Dates: TN G.O. public-holiday lists for 2026 (Mon 9 Nov 2026 declared an additional holiday on 28 Oct 2026); Pongal 2027 from press reports of the 2027 list, not yet the G.O. Researched 8 Nov 2026; nothing usable was found for 2010–2014 (2013–14 survive only as conflicting back-references).",
+  "festivals": [
+    {
+      "id": "vinayaka",
+      "name": {
+        "en": "Vinayaka Chaturthi",
+        "ta": "விநாயகர் சதுர்த்தி"
+      },
+      "day": "2026-09-14",
+      "from": -1,
+      "to": 0
+    },
+    {
+      "id": "ayudha",
+      "name": {
+        "en": "Ayudha Pooja",
+        "ta": "ஆயுத பூஜை"
+      },
+      "day": "2026-10-19",
+      "from": -1,
+      "to": 1
+    },
+    {
+      "id": "deepavali",
+      "name": {
+        "en": "Deepavali",
+        "ta": "தீபாவளி"
+      },
+      "day": "2026-11-08",
+      "from": -2,
+      "to": 0,
+      "counted": [
+        -1,
+        0
+      ]
+    },
+    {
+      "id": "christmas",
+      "name": {
+        "en": "Christmas",
+        "ta": "கிறிஸ்துமஸ்"
+      },
+      "day": "2026-12-25",
+      "from": -1,
+      "to": 0
+    },
+    {
+      "id": "newyear",
+      "name": {
+        "en": "New Year’s Eve",
+        "ta": "புத்தாண்டு முன்தினம்"
+      },
+      "day": "2026-12-31",
+      "from": -1,
+      "to": 0
+    },
+    {
+      "id": "pongal",
+      "name": {
+        "en": "Pongal",
+        "ta": "பொங்கல்"
+      },
+      "day": "2027-01-15",
+      "from": -1,
+      "to": 2
+    }
+  ],
+  "history": {
+    "deepavali": [
+      {
+        "year": 2015,
+        "day": "2015-11-10",
+        "perDay": {
+          "2015-11-09": 93,
+          "2015-11-10": 123
+        },
+        "reports": [
+          {
+            "dates": [
+              "2015-11-09",
+              "2015-11-10"
+            ],
+            "total": 216,
+            "source": "Deccan Chronicle",
+            "published": "1 Nov 2016",
+            "headline": "Liquor guzzling up by 11 per cent",
+            "url": "https://www.deccanchronicle.com/nation/in-other-news/011116/liquor-guzzling-up-by-11-per-cent.html",
+            "note": "Quoted a year later as ₹216 cr over two days and ₹123 cr on Deepavali, so ₹93 cr on the eve by subtraction."
+          },
+          {
+            "dates": [
+              "2015-11-08",
+              "2015-11-09",
+              "2015-11-10"
+            ],
+            "total": 372,
+            "source": "Deccan Chronicle",
+            "published": "13 Nov 2015",
+            "headline": "Cracker sale falls, Tasmac profit soars",
+            "url": "https://www.deccanchronicle.com/151113/nation-current-affairs/article/cracker-sale-falls-tasmac-profit-soars",
+            "note": "The three days leading to Deepavali; not attributed to TASMAC."
+          }
+        ]
+      },
+      {
+        "year": 2016,
+        "day": "2016-10-29",
+        "perDay": {
+          "2016-10-28": 108,
+          "2016-10-29": 135,
+          "2016-10-30": 115
+        },
+        "reports": [
+          {
+            "dates": [
+              "2016-10-28",
+              "2016-10-29"
+            ],
+            "total": 243,
+            "source": "Deccan Chronicle, citing a senior TASMAC official",
+            "published": "1 Nov 2016",
+            "headline": "Liquor guzzling up by 11 per cent",
+            "url": "https://www.deccanchronicle.com/nation/in-other-news/011116/liquor-guzzling-up-by-11-per-cent.html",
+            "note": "DT Next gave the same ₹243 cr. Covai Post added ₹115 cr on 30 Oct for ₹358 cr over three days. Later restated as ₹255 cr and ₹265 cr."
+          }
+        ]
+      },
+      {
+        "year": 2017,
+        "day": "2017-10-18",
+        "perDay": {
+          "2017-10-17": 91,
+          "2017-10-18": 132
+        },
+        "reports": [
+          {
+            "dates": [
+              "2017-10-17",
+              "2017-10-18"
+            ],
+            "total": 223,
+            "source": "DT Next, citing a TASMAC official",
+            "published": "19 Oct 2017",
+            "headline": "Fizz goes out of TASMAC sales, nets Rs 20 cr less over 2016",
+            "url": "https://www.dtnext.in/city/2017/10/19/fizz-goes-out-of-tasmac-sales-nets-rs-20-cr-less-over-2016",
+            "note": "Other outlets gave ₹230–245 cr for the same two days (Deccan Chronicle ₹240 cr, ₹135 cr on Deepavali)."
+          }
+        ]
+      },
+      {
+        "year": 2018,
+        "day": "2018-11-06",
+        "perDay": {
+          "2018-11-05": 150,
+          "2018-11-06": 180
+        },
+        "reports": [
+          {
+            "dates": [
+              "2018-11-05",
+              "2018-11-06"
+            ],
+            "total": 330,
+            "source": "DT Next, citing a senior TASMAC official",
+            "published": "8 Nov 2018",
+            "headline": "Deepavali: TN liquor sale crosses Rs 300 crore in 2 days, Chennai not so high",
+            "url": "https://www.dtnext.in/news/tamilnadu/deepavali-tn-liquor-sale-crosses-rs-300-crore-in-2-days-chennai-not-so-high",
+            "note": "Provisional. Restated a year later as ₹328 cr (148 + 180)."
+          }
+        ]
+      },
+      {
+        "year": 2019,
+        "day": "2019-10-27",
+        "perDay": {
+          "2019-10-25": 100,
+          "2019-10-26": 183,
+          "2019-10-27": 172
+        },
+        "reports": [
+          {
+            "dates": [
+              "2019-10-26",
+              "2019-10-27"
+            ],
+            "total": 355,
+            "source": "The Hindu",
+            "published": "29 Oct 2019",
+            "headline": "Deepavali sales: Tasmac rakes in ₹355 crore over two days",
+            "note": "8.2% above 2018 (₹328 cr). Shops in Madurai, Ramanathapuram and Sivagangai were shut on 27 Oct."
+          },
+          {
+            "dates": [
+              "2019-10-25",
+              "2019-10-26",
+              "2019-10-27"
+            ],
+            "total": 455,
+            "source": "Deccan Chronicle",
+            "published": "29 Oct 2019",
+            "headline": "Tamil Nadu sells Rs 455 cr liquor during Deepavali holidays",
+            "url": "https://www.deccanchronicle.com/nation/current-affairs/291019/no-economic-slide-seen-in-roaring-festival-liquor-business.html"
+          }
+        ]
+      },
+      {
+        "year": 2020,
+        "day": "2020-11-14",
+        "perDay": {
+          "2020-11-13": 227.88,
+          "2020-11-14": 237.91
+        },
+        "reports": [
+          {
+            "dates": [
+              "2020-11-13",
+              "2020-11-14"
+            ],
+            "total": 465.79,
+            "regions": {
+              "Madurai": 103.82,
+              "Trichy": 95.47,
+              "Chennai": 94.36,
+              "Salem": 87.58,
+              "Coimbatore": 84.56
+            },
+            "source": "The Hindu",
+            "published": "Nov 2020",
+            "headline": "Festival sale: Tasmac collects ₹465 crore in two days",
+            "url": "https://www.inkl.com/news/festival-sale-tasmac-collects-465-crore-in-two-days",
+            "note": "Regions add up exactly. Later restated as ₹467.69 cr, a digit swap (239.81 for 237.91)."
+          }
+        ]
+      },
+      {
+        "year": 2021,
+        "day": "2021-11-04",
+        "perDay": {
+          "2021-11-03": 205.61,
+          "2021-11-04": 225.42
+        },
+        "reports": [
+          {
+            "dates": [
+              "2021-11-03",
+              "2021-11-04"
+            ],
+            "total": 431.03,
+            "regions": {
+              "Madurai": 98.89,
+              "Trichy": 89.95,
+              "Salem": 87.89,
+              "Chennai": 79.84,
+              "Coimbatore": 74.46
+            },
+            "source": "Asianet News Tamil, citing TASMAC",
+            "published": "5 Nov 2021",
+            "url": "https://tamil.asianetnews.com/politics/rs-431-crore-worth-of-liquor-sold-at-tasmac-for-diwali-festivel-r234on",
+            "note": "Every day and region reconciles. TOI gave ₹435 cr; The Hindu ₹444.03 cr."
+          }
+        ]
+      },
+      {
+        "year": 2022,
+        "day": "2022-10-24",
+        "perDay": {
+          "2022-10-22": 205.42,
+          "2022-10-23": 258.79,
+          "2022-10-24": 244.08
+        },
+        "reports": [
+          {
+            "dates": [
+              "2022-10-22",
+              "2022-10-23"
+            ],
+            "total": 464.21,
+            "source": "Zee News Tamil",
+            "published": "25 Oct 2022",
+            "url": "https://zeenews.india.com/tamil/tamil-nadu/tamil-nadu-diwali-tasmac-liquor-new-record-416413",
+            "note": "Regions given per day and add up exactly."
+          },
+          {
+            "dates": [
+              "2022-10-22",
+              "2022-10-23",
+              "2022-10-24"
+            ],
+            "total": 708,
+            "regions": {
+              "Madurai": 153.91,
+              "Salem": 142.39,
+              "Trichy": 139.8,
+              "Chennai": 138.96,
+              "Coimbatore": 133.23
+            },
+            "source": "IndiaHerald, citing TASMAC",
+            "published": "25 Oct 2022",
+            "url": "https://www.indiaherald.com/Breaking/Read/994545039/Alcohol-lovers-on-Diwali-Sales-of-so-many-crores",
+            "note": "Deepavali day ₹244.08 cr. Three-day regions are the sum of the daily releases."
+          }
+        ]
+      },
+      {
+        "year": 2023,
+        "day": "2023-11-12",
+        "perDay": {
+          "2023-11-11": 220.85,
+          "2023-11-12": 246.78
+        },
+        "reports": [
+          {
+            "dates": [
+              "2023-11-11",
+              "2023-11-12"
+            ],
+            "total": 467.63,
+            "regions": {
+              "Madurai": 104.7,
+              "Chennai": 101.1,
+              "Trichy": 95.62,
+              "Salem": 86.4,
+              "Coimbatore": 79.81
+            },
+            "source": "DT Next, citing Daily Thanthi",
+            "published": "13 Nov 2023",
+            "headline": "Deepavali ends on a high for Tasmac with liquor sales of Rs 467.63 crores",
+            "url": "https://www.dtnext.in/news/tamilnadu/deepavali-ends-on-a-high-for-tasmac-with-liquor-sales-of-rs-46763-crores-748019",
+            "note": "ANI and TOI rounded it to ₹467.69 cr and ₹468 cr."
+          }
+        ]
+      },
+      {
+        "year": 2024,
+        "day": "2024-10-31",
+        "perDay": {
+          "2024-10-30": 202.59,
+          "2024-10-31": 235.94
+        },
+        "reports": [
+          {
+            "dates": [
+              "2024-10-30",
+              "2024-10-31"
+            ],
+            "total": 438.53,
+            "regions": {
+              "Chennai": 101.34,
+              "Madurai": 88.61,
+              "Trichy": 86.32,
+              "Salem": 83.52,
+              "Coimbatore": 78.74
+            },
+            "source": "DT Next, citing Daily Thanthi",
+            "published": "2 Nov 2024",
+            "headline": "High spirits on Deepavali: Tamil Nadu gulps liquor worth Rs 438 crore in just two days",
+            "url": "https://www.dtnext.in/news/tamilnadu/high-spirits-on-deepavali-tamil-nadu-gulps-liquor-worth-rs-438-crore-in-just-two-days-809654",
+            "note": "TOI’s early figure was ₹430 cr, with ₹220 cr on Deepavali."
+          }
+        ]
+      },
+      {
+        "year": 2025,
+        "day": "2025-10-20",
+        "perDay": {
+          "2025-10-18": 230.06,
+          "2025-10-19": 293.73,
+          "2025-10-20": 266.06
+        },
+        "reports": [
+          {
+            "dates": [
+              "2025-10-18",
+              "2025-10-19",
+              "2025-10-20"
+            ],
+            "total": 789.85,
+            "regions": {
+              "Madurai": 170.64,
+              "Chennai": 158.25,
+              "Trichy": 157.31,
+              "Salem": 153.34,
+              "Coimbatore": 150.31
+            },
+            "source": "DT Next; The New Indian Express",
+            "published": "22 Oct 2025",
+            "headline": "Madurai tops Deepavali liquor sales in Tamil Nadu",
+            "url": "https://www.dtnext.in/news/tamilnadu/madurai-tops-deepavali-liquor-sales-in-tamil-nadu-850348"
+          }
+        ]
+      }
+    ]
+  }
+}

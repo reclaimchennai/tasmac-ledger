@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this data or code, please cite it as below and credit the original publishers, TASMAC, TNGIS and MoSPI."
+title: "TASMAC Ledger, open data on Tamil Nadu liquor shops, prices and sales"
+type: dataset
+authors:
+  - name: "Reclaim Chennai"
+repository-code: "https://github.com/reclaimchennai/tasmac-ledger"
+url: "https://tasmac.reclaimchennai.city"
+license: MIT
+date-released: 2026-11-10
+keywords: [tamil nadu, tasmac, liquor, prices, mrp, sales, open data, deepavali]

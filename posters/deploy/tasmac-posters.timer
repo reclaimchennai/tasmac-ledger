@@ -1,0 +1,11 @@
+[Unit]
+Description=Redraw the TASMAC sales posters daily, after the trading day rolls over (11:00 IST)
+
+[Timer]
+# 06:30 UTC = 12:00 IST: the harvester has rebuilt yesterday's trading day by then.
+OnCalendar=*-*-* 06:30:00
+RandomizedDelaySec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target

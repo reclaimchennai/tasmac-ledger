@@ -1,0 +1,39 @@
+{
+  "name": "tasmac-mirror",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "NEXT_DIST_DIR=.next-dev next dev",
+    "build": "next build",
+    "start": "next start",
+    "harvest:ref": "tsx src/scraper/harvest-reference.ts",
+    "harvest:stock": "tsx src/scraper/harvest-stock.ts",
+    "harvest:all": "tsx src/scraper/harvest-reference.ts && tsx src/scraper/fix-names.ts && tsx src/scraper/translate.ts && tsx src/scraper/harvest-stock.ts",
+    "rollup": "tsx src/scraper/rollup.ts",
+    "fix:names": "tsx src/scraper/fix-names.ts",
+    "translate": "tsx src/scraper/translate.ts",
+    "probe": "tsx src/scraper/probe.ts",
+    "bot": "tsx src/bot/index.ts",
+    "harvest:gis": "tsx src/scraper/harvest-gis.ts",
+    "watch": "tsx src/scraper/watch.ts",
+    "i18n:export": "tsx src/scraper/i18n-export.ts",
+    "i18n:import": "tsx src/scraper/i18n-import.ts",
+    "i18n:gemini": "tsx src/scraper/i18n-gemini.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "dotenv": "^17.4.2",
+    "next": "^15.5.22",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "tsx": "^4.23.7",
+    "typescript": "^5.9.3"
+  }
+}

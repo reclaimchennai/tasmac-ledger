@@ -1,0 +1,32 @@
+node_modules/
+.next/
+.next-dev/
+out/
+build/
+
+# Secrets — never commit
+.env
+.env.local
+.env*.local
+
+# Harvested data (regenerate with: npm run harvest:all)
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# Translation review exports (regenerate with: npm run i18n:export)
+data/i18n/
+
+.DS_Store
+*.log
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Local only
+logs/
+x
+*.bak.*
+/release/
+/*.pdf
+data/posters/
+data/tunnel-url.txt

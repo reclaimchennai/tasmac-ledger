@@ -1,0 +1,30 @@
+{
+  "about": "India, consumer price index, annual average (2010 = 100). World Bank indicator FP.CPI.TOTL, from the IMF International Financial Statistics; World Bank last updated 2026-10-08, retrieved 2026-11-10 from https://api.worldbank.org/v2/country/IND/indicator/FP.CPI.TOTL?format=json. Used only as a ratio between years, so the base does not matter.",
+  "source": "World Bank FP.CPI.TOTL (IMF IFS)",
+  "url": "https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=IN",
+  "index": {
+    "2012": 119.2355,
+    "2013": 131.1804,
+    "2014": 139.9244,
+    "2015": 146.7905,
+    "2016": 154.0540,
+    "2017": 159.1812,
+    "2018": 165.4511,
+    "2019": 171.6216,
+    "2020": 182.9888,
+    "2021": 192.3787,
+    "2022": 205.2662,
+    "2023": 216.8620,
+    "2024": 227.6033,
+    "2025": 233.0631
+  },
+  "hikes": [
+    { "date": "2014-08-20", "what": "Rs 10 on an ordinary or medium quarter, Rs 20 on premium", "source": "The News Minute", "url": "https://www.thenewsminute.com/article/tn-govt-set-earn-rs-750-crore-hike-liquor-rates-17848" },
+    { "date": "2017-10-13", "what": "revised MRP list", "source": "TASMAC MRP list w.e.f. 2017-10-13" },
+    { "date": "2020-02-07", "what": "Rs 10 on a quarter, Rs 10 on beer", "source": "The News Minute", "url": "https://www.thenewsminute.com/article/beer-get-costlier-tamil-nadu-friday-tasmac-hikes-prices-117680" },
+    { "date": "2020-05-07", "what": "15% excise rise, Rs 10 to 20 on a quarter", "source": "Deccan Herald", "url": "https://www.deccanherald.com/amp/story/india%2Fcoronavirus-lockdown-30-tamil-nadu-increases-liquor-prices-a-day-before-opening-tasmac-shops-834128.html" },
+    { "date": "2022-03-07", "what": "Rs 10 on an ordinary quarter, Rs 20 on medium and premium, Rs 10 on beer", "source": "The News Minute", "url": "https://www.thenewsminute.com/tamil-nadu/tasmac-hikes-liquor-prices-across-tamil-nadu-161664" },
+    { "date": "2024-02-01", "what": "Rs 10 on an ordinary or medium quarter, Rs 20 on premium", "source": "Deccan Herald", "url": "https://www.deccanherald.com/india/tamil-nadu/alcoholic-beverages-to-cost-more-in-tamil-nadu-from-feb-1-2869797" },
+    { "date": "2026-11-01", "what": "Rs 10 bottle cess in the MRP, refunded when the empty is returned", "source": "Business Today", "url": "https://www.businesstoday.in/india/story/liquor-to-cost-rs10-more-in-tamil-nadu-from-today-but-you-can-get-it-back-heres-how-564967-2026-11-01" }
+  ]
+}

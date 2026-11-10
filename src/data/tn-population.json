@@ -1,0 +1,392 @@
+{
+ "year": 2026,
+ "source": "Census of India, Report of the Technical Group on Population Projections (National Commission on Population, Ministry of Health & Family Welfare, July 2020) \u2014 'Population Projections for India and States 2011-2036', district tables for Tamil Nadu (state 33/34, districts 01-32), projected population by age and sex, 2012-2031. Figures here are the 2026 projection.",
+ "method": [
+  "The report projects the 32 districts of the 2011 census. Our district table has the 38 of today, so each 2011 parent is split between its present-day successors in proportion to their 2011 census populations as published by the Government of Tamil Nadu (tn.gov.in/district_view).",
+  "Chennai district grew from 175 to 426 sq km in 2018, taking in parts of Thiruvallur and Kanchipuram. Kanchipuram's successors account for 3,722,645 of its 3,998,252, so 275,607 went to Chennai; Chennai's published post-expansion figure of 6,748,026 then fixes Thiruvallur's transfer at 1,825,687, leaving Thiruvallur 1,902,417. The four reconcile exactly to the three 2011 parents (12,373,088). TASMAC's own district assignment matches this: Ambattur, Madhavaram, Maduravoyal, Thiruvottiyur, Alandur and Sholinganallur shops are filed under Chennai, Avadi/Ponneri/Poonamallee under Tiruvallur.",
+  "Theni's detailed age-sex tables in the report are corrupt \u2014 the 2017-2031 pages repeat Madurai's figures verbatim. Theni's totals are taken from the report's own district summary table (1,339,117 for 2026) and its age split from its sound 2012-2016 pages, carried forward at the statewide drift.",
+  "The 38 districts sum to 77,544,965 against the report's Tamil Nadu total of 77,546,004 \u2014 a rounding residual of 1,039 people (0.001%)."
+ ],
+ "districts": [
+  {
+   "district_id": 1,
+   "name": "Ariyalur",
+   "pop": 811421,
+   "men": 400791,
+   "women": 410630,
+   "adults": 606445,
+   "adult_men": 294628,
+   "adult_women": 311817
+  },
+  {
+   "district_id": 2,
+   "name": "Chengalpattu",
+   "pop": 2747467,
+   "men": 1376568,
+   "women": 1370899,
+   "adults": 2110203,
+   "adult_men": 1052478,
+   "adult_women": 1057725
+  },
+  {
+   "district_id": 3,
+   "name": "Chennai",
+   "pop": 7252863,
+   "men": 3629579,
+   "women": 3623284,
+   "adults": 5643965,
+   "adult_men": 2809085,
+   "adult_women": 2834880
+  },
+  {
+   "district_id": 4,
+   "name": "Coimbatore",
+   "pop": 3716849,
+   "men": 1849695,
+   "women": 1867154,
+   "adults": 2942452,
+   "adult_men": 1455786,
+   "adult_women": 1486666
+  },
+  {
+   "district_id": 5,
+   "name": "Cuddalore",
+   "pop": 2800855,
+   "men": 1403021,
+   "women": 1397834,
+   "adults": 2103799,
+   "adult_men": 1042580,
+   "adult_women": 1061219
+  },
+  {
+   "district_id": 6,
+   "name": "Dharmapuri",
+   "pop": 1619400,
+   "men": 828212,
+   "women": 791188,
+   "adults": 1196900,
+   "adult_men": 605233,
+   "adult_women": 591667
+  },
+  {
+   "district_id": 7,
+   "name": "Dindigul",
+   "pop": 2321406,
+   "men": 1156196,
+   "women": 1165210,
+   "adults": 1778281,
+   "adult_men": 876400,
+   "adult_women": 901881
+  },
+  {
+   "district_id": 8,
+   "name": "Erode",
+   "pop": 2420228,
+   "men": 1208533,
+   "women": 1211695,
+   "adults": 1925780,
+   "adult_men": 955103,
+   "adult_women": 970677
+  },
+  {
+   "district_id": 9,
+   "name": "Kallakurichi",
+   "pop": 1472789,
+   "men": 737665,
+   "women": 735124,
+   "adults": 1086145,
+   "adult_men": 540152,
+   "adult_women": 545993
+  },
+  {
+   "district_id": 10,
+   "name": "Kancheepuram",
+   "pop": 1253655,
+   "men": 628121,
+   "women": 625534,
+   "adults": 962875,
+   "adult_men": 480240,
+   "adult_women": 482634
+  },
+  {
+   "district_id": 11,
+   "name": "Kanniyakumari",
+   "pop": 2010450,
+   "men": 990840,
+   "women": 1019610,
+   "adults": 1561168,
+   "adult_men": 763855,
+   "adult_women": 797313
+  },
+  {
+   "district_id": 12,
+   "name": "Karur",
+   "pop": 1144205,
+   "men": 564958,
+   "women": 579247,
+   "adults": 886866,
+   "adult_men": 432258,
+   "adult_women": 454608
+  },
+  {
+   "district_id": 13,
+   "name": "Krishnagiri",
+   "pop": 2020286,
+   "men": 1027086,
+   "women": 993200,
+   "adults": 1482371,
+   "adult_men": 748216,
+   "adult_women": 734155
+  },
+  {
+   "district_id": 14,
+   "name": "Madurai",
+   "pop": 3265564,
+   "men": 1632752,
+   "women": 1632812,
+   "adults": 2487619,
+   "adult_men": 1231013,
+   "adult_women": 1256606
+  },
+  {
+   "district_id": 15,
+   "name": "Mayiladuthurai",
+   "pop": 987148,
+   "men": 485011,
+   "women": 502137,
+   "adults": 748106,
+   "adult_men": 364398,
+   "adult_women": 383708
+  },
+  {
+   "district_id": 16,
+   "name": "Nagapattinam",
+   "pop": 749285,
+   "men": 368143,
+   "women": 381142,
+   "adults": 567843,
+   "adult_men": 276593,
+   "adult_women": 291250
+  },
+  {
+   "district_id": 17,
+   "name": "Namakkal",
+   "pop": 1855762,
+   "men": 929802,
+   "women": 925960,
+   "adults": 1463902,
+   "adult_men": 723964,
+   "adult_women": 739938
+  },
+  {
+   "district_id": 18,
+   "name": "Nilgiris",
+   "pop": 790511,
+   "men": 385217,
+   "women": 405294,
+   "adults": 612288,
+   "adult_men": 295915,
+   "adult_women": 316373
+  },
+  {
+   "district_id": 19,
+   "name": "Perambalur",
+   "pop": 607531,
+   "men": 301802,
+   "women": 305729,
+   "adults": 454833,
+   "adult_men": 222254,
+   "adult_women": 232579
+  },
+  {
+   "district_id": 20,
+   "name": "Pudukkottai",
+   "pop": 1739528,
+   "men": 859108,
+   "women": 880420,
+   "adults": 1294693,
+   "adult_men": 632581,
+   "adult_women": 662112
+  },
+  {
+   "district_id": 21,
+   "name": "Ramanathapuram",
+   "pop": 1454678,
+   "men": 730187,
+   "women": 724491,
+   "adults": 1096914,
+   "adult_men": 547844,
+   "adult_women": 549070
+  },
+  {
+   "district_id": 22,
+   "name": "Ranipet",
+   "pop": 1300877,
+   "men": 645140,
+   "women": 655738,
+   "adults": 976999,
+   "adult_men": 479746,
+   "adult_women": 497253
+  },
+  {
+   "district_id": 23,
+   "name": "Salem",
+   "pop": 3742238,
+   "men": 1905609,
+   "women": 1836629,
+   "adults": 2859981,
+   "adult_men": 1441488,
+   "adult_women": 1418493
+  },
+  {
+   "district_id": 24,
+   "name": "Sivagangai",
+   "pop": 1439332,
+   "men": 715227,
+   "women": 724105,
+   "adults": 1095006,
+   "adult_men": 539925,
+   "adult_women": 555081
+  },
+  {
+   "district_id": 25,
+   "name": "Tenkasi",
+   "pop": 1513062,
+   "men": 744152,
+   "women": 768909,
+   "adults": 1145914,
+   "adult_men": 557557,
+   "adult_women": 588357
+  },
+  {
+   "district_id": 26,
+   "name": "Thanjavur",
+   "pop": 2586166,
+   "men": 1264739,
+   "women": 1321427,
+   "adults": 1977733,
+   "adult_men": 955775,
+   "adult_women": 1021958
+  },
+  {
+   "district_id": 27,
+   "name": "Theni",
+   "pop": 1339117,
+   "men": 669245,
+   "women": 669872,
+   "adults": 1026707,
+   "adult_men": 506787,
+   "adult_women": 519920
+  },
+  {
+   "district_id": 28,
+   "name": "Thiruchirappalli",
+   "pop": 2926125,
+   "men": 1446434,
+   "women": 1479691,
+   "adults": 2244560,
+   "adult_men": 1097800,
+   "adult_women": 1146760
+  },
+  {
+   "district_id": 29,
+   "name": "Thirupathur",
+   "pop": 1195041,
+   "men": 592653,
+   "women": 602389,
+   "adults": 897513,
+   "adult_men": 440715,
+   "adult_women": 456798
+  },
+  {
+   "district_id": 30,
+   "name": "Thiruvarur",
+   "pop": 1358955,
+   "men": 670325,
+   "women": 688630,
+   "adults": 1045925,
+   "adult_men": 511948,
+   "adult_women": 533977
+  },
+  {
+   "district_id": 31,
+   "name": "Thoothukudi",
+   "pop": 1881268,
+   "men": 925246,
+   "women": 956022,
+   "adults": 1420316,
+   "adult_men": 691615,
+   "adult_women": 728701
+  },
+  {
+   "district_id": 32,
+   "name": "Tirunelveli",
+   "pop": 1789984,
+   "men": 880348,
+   "women": 909636,
+   "adults": 1355641,
+   "adult_men": 659602,
+   "adult_women": 696039
+  },
+  {
+   "district_id": 33,
+   "name": "Tiruppur",
+   "pop": 2664520,
+   "men": 1332920,
+   "women": 1331600,
+   "adults": 2088690,
+   "adult_men": 1039401,
+   "adult_women": 1049289
+  },
+  {
+   "district_id": 34,
+   "name": "Tiruvallur",
+   "pop": 2044735,
+   "men": 1023990,
+   "women": 1020745,
+   "adults": 1559899,
+   "adult_men": 776369,
+   "adult_women": 783530
+  },
+  {
+   "district_id": 35,
+   "name": "Tiruvannamalai",
+   "pop": 2649316,
+   "men": 1321935,
+   "women": 1327381,
+   "adults": 1992714,
+   "adult_men": 985296,
+   "adult_women": 1007418
+  },
+  {
+   "district_id": 36,
+   "name": "Vellore",
+   "pop": 1735083,
+   "men": 860474,
+   "women": 874609,
+   "adults": 1303101,
+   "adult_men": 639875,
+   "adult_women": 663226
+  },
+  {
+   "district_id": 37,
+   "name": "Viluppuram",
+   "pop": 2249576,
+   "men": 1126729,
+   "women": 1122847,
+   "adults": 1659007,
+   "adult_men": 825043,
+   "adult_women": 833964
+  },
+  {
+   "district_id": 38,
+   "name": "Virudhunagar",
+   "pop": 2087689,
+   "men": 1035084,
+   "women": 1052605,
+   "adults": 1587334,
+   "adult_men": 780752,
+   "adult_women": 806582
+  }
+ ]
+}

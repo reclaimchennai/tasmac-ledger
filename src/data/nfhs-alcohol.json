@@ -1,0 +1,298 @@
+{
+ "note": "Share of men / women age 15+ who consume alcohol, by district. m6/w6 = NFHS-6 (2023-24), m5/w5 = NFHS-5 (2019-21); the six districts formed in 2019 have no NFHS-5 row. Extracted from ~/projects/nfhs (data/districts_long.csv, indicators alcohol_m / alcohol_w), district names mapped to our district.district_id.",
+ "source": "International Institute for Population Sciences, National Family Health Survey district fact sheets — NFHS-5 (2019-21) and NFHS-6 (2023-24).",
+ "rows": [
+  {
+   "district_id": 1,
+   "name": "Ariyalur",
+   "m5": 28.1,
+   "m6": 26.6,
+   "w5": 0.1,
+   "w6": 0.4
+  },
+  {
+   "district_id": 2,
+   "name": "Chengalpattu",
+   "m6": 24.2,
+   "w6": 0.4
+  },
+  {
+   "district_id": 3,
+   "name": "Chennai",
+   "m5": 16.1,
+   "m6": 16.0,
+   "w5": 0.1,
+   "w6": 0.5
+  },
+  {
+   "district_id": 4,
+   "name": "Coimbatore",
+   "m5": 22.9,
+   "m6": 20.2,
+   "w5": 0.5,
+   "w6": 0.3
+  },
+  {
+   "district_id": 5,
+   "name": "Cuddalore",
+   "m5": 32.6,
+   "m6": 29.1,
+   "w5": 0.6,
+   "w6": 0.3
+  },
+  {
+   "district_id": 6,
+   "name": "Dharmapuri",
+   "m5": 26.8,
+   "m6": 30.9,
+   "w5": 0.7,
+   "w6": 1.7
+  },
+  {
+   "district_id": 7,
+   "name": "Dindigul",
+   "m5": 26.0,
+   "m6": 23.9,
+   "w5": 0.1,
+   "w6": 0.1
+  },
+  {
+   "district_id": 8,
+   "name": "Erode",
+   "m5": 23.5,
+   "m6": 26.5,
+   "w5": 0.1,
+   "w6": 0.3
+  },
+  {
+   "district_id": 9,
+   "name": "Kallakurichi",
+   "m6": 28.9,
+   "w6": 0.5
+  },
+  {
+   "district_id": 10,
+   "name": "Kancheepuram",
+   "m5": 28.9,
+   "m6": 28.5,
+   "w5": 0.8,
+   "w6": 0.1
+  },
+  {
+   "district_id": 11,
+   "name": "Kanniyakumari",
+   "m5": 14.8,
+   "m6": 16.4,
+   "w5": 0.2,
+   "w6": 0.3
+  },
+  {
+   "district_id": 12,
+   "name": "Karur",
+   "m5": 29.0,
+   "m6": 24.3,
+   "w5": 0.4,
+   "w6": 0.2
+  },
+  {
+   "district_id": 13,
+   "name": "Krishnagiri",
+   "m5": 22.7,
+   "m6": 22.2,
+   "w5": 0.2,
+   "w6": 0.2
+  },
+  {
+   "district_id": 14,
+   "name": "Madurai",
+   "m5": 24.5,
+   "m6": 22.3,
+   "w5": 0.4,
+   "w6": 0.4
+  },
+  {
+   "district_id": 15,
+   "name": "Mayiladuthurai",
+   "m6": 30.8,
+   "w6": 0.8
+  },
+  {
+   "district_id": 16,
+   "name": "Nagapattinam",
+   "m5": 34.3,
+   "m6": 29.2,
+   "w5": 0.3,
+   "w6": 0.1
+  },
+  {
+   "district_id": 17,
+   "name": "Namakkal",
+   "m5": 27.1,
+   "m6": 27.2,
+   "w5": 0.1,
+   "w6": 0.2
+  },
+  {
+   "district_id": 18,
+   "name": "Nilgiris",
+   "m5": 25.9,
+   "m6": 29.4,
+   "w5": 1.1,
+   "w6": 0.1
+  },
+  {
+   "district_id": 19,
+   "name": "Perambalur",
+   "m5": 29.1,
+   "m6": 23.5,
+   "w5": 0.2,
+   "w6": 0.2
+  },
+  {
+   "district_id": 20,
+   "name": "Pudukkottai",
+   "m5": 31.7,
+   "m6": 26.3,
+   "w5": 0.8,
+   "w6": 0.3
+  },
+  {
+   "district_id": 21,
+   "name": "Ramanathapuram",
+   "m5": 29.9,
+   "m6": 25.9,
+   "w5": 0.6,
+   "w6": 0.3
+  },
+  {
+   "district_id": 22,
+   "name": "Ranipet",
+   "m6": 19.3,
+   "w6": 0.1
+  },
+  {
+   "district_id": 23,
+   "name": "Salem",
+   "m5": 24.1,
+   "m6": 21.4,
+   "w5": 0.2,
+   "w6": 0.2
+  },
+  {
+   "district_id": 24,
+   "name": "Sivagangai",
+   "m5": 23.0,
+   "m6": 22.9,
+   "w5": 0.4,
+   "w6": 0.1
+  },
+  {
+   "district_id": 25,
+   "name": "Tenkasi",
+   "m6": 19.8,
+   "w6": 0.4
+  },
+  {
+   "district_id": 26,
+   "name": "Thanjavur",
+   "m5": 30.0,
+   "m6": 23.7,
+   "w5": 0.5,
+   "w6": 0.3
+  },
+  {
+   "district_id": 27,
+   "name": "Theni",
+   "m5": 23.0,
+   "m6": 22.7,
+   "w5": 0.3,
+   "w6": 0.3
+  },
+  {
+   "district_id": 28,
+   "name": "Thiruchirappalli",
+   "m5": 25.7,
+   "m6": 19.4,
+   "w5": 0.4,
+   "w6": 0.1
+  },
+  {
+   "district_id": 29,
+   "name": "Thirupathur",
+   "m6": 21.8,
+   "w6": 0.3
+  },
+  {
+   "district_id": 30,
+   "name": "Thiruvarur",
+   "m5": 32.2,
+   "m6": 32.5,
+   "w5": 0.4,
+   "w6": 0.4
+  },
+  {
+   "district_id": 31,
+   "name": "Thoothukudi",
+   "m5": 21.6,
+   "m6": 18.0,
+   "w5": 0.3,
+   "w6": 0.1
+  },
+  {
+   "district_id": 32,
+   "name": "Tirunelveli",
+   "m5": 17.3,
+   "m6": 17.1,
+   "w5": 0.0,
+   "w6": 0.1
+  },
+  {
+   "district_id": 33,
+   "name": "Tiruppur",
+   "m5": 26.2,
+   "m6": 27.3,
+   "w5": 0.1,
+   "w6": 0.3
+  },
+  {
+   "district_id": 34,
+   "name": "Tiruvallur",
+   "m5": 26.7,
+   "m6": 21.2,
+   "w5": 0.1,
+   "w6": 0.3
+  },
+  {
+   "district_id": 35,
+   "name": "Tiruvannamalai",
+   "m5": 24.2,
+   "m6": 28.5,
+   "w5": 0.2,
+   "w6": 0.5
+  },
+  {
+   "district_id": 36,
+   "name": "Vellore",
+   "m5": 23.0,
+   "m6": 20.2,
+   "w5": 0.3,
+   "w6": 0.3
+  },
+  {
+   "district_id": 37,
+   "name": "Viluppuram",
+   "m5": 38.1,
+   "m6": 29.1,
+   "w5": 0.2,
+   "w6": 0.2
+  },
+  {
+   "district_id": 38,
+   "name": "Virudhunagar",
+   "m5": 22.8,
+   "m6": 22.7,
+   "w5": 0.5,
+   "w6": 0.4
+  }
+ ]
+}

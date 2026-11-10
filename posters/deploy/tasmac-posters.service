@@ -1,0 +1,9 @@
+[Unit]
+Description=TASMAC Ledger: redraw the sales posters (data/posters) from the analytics facts
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/tasmac
+ExecStart=/usr/bin/python3 posters/render.py
+Nice=15
+TimeoutStartSec=600

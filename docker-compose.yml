@@ -1,0 +1,64 @@
+# Site + scraper for tasmac.reclaimchennai.city.
+#
+# No host port published — `tasmac-site` is reachable only on the shared
+# Caddy network (`web`), the same pattern cam-app and police-reports use.
+# Caddy proxies to `tasmac-site:3000` by container name (see
+# ~/projects/caddy/Caddyfile).
+#
+# Both services share one sqlite file via a bind mount (WAL mode handles the
+# concurrent reader/writer fine on a local filesystem). `data/` and `logs/`
+# are gitignored and persist on the host across rebuilds.
+services:
+  tasmac-site:
+    build: .
+    image: tasmac-app:latest
+    container_name: tasmac-site
+    restart: unless-stopped
+    command: ["npx", "next", "start", "-p", "3000", "-H", "0.0.0.0"]
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      TASMAC_DB: /app/data/tasmac.db
+    volumes:
+      - ./data:/app/data
+    networks:
+      - web
+
+  tasmac-watch:
+    build: .
+    image: tasmac-app:latest
+    container_name: tasmac-watch
+    restart: unless-stopped
+    command: ["npx", "tsx", "src/scraper/watch.ts", "--every=20"]
+    environment:
+      NODE_ENV: production
+      TASMAC_DB: /app/data/tasmac.db
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    # No network needed to reach Caddy — it only calls out to the upstream
+    # TASMAC/TNGIS APIs — but it still needs the default bridge for that,
+    # which every service gets unless `network_mode: none` is set.
+
+  tasmac-bot:
+    build: .
+    image: tasmac-app:latest
+    container_name: tasmac-bot
+    restart: unless-stopped
+    command: ["npx", "tsx", "src/bot/index.ts"]
+    env_file: .env.local
+    environment:
+      NODE_ENV: production
+      TASMAC_DB: /app/data/tasmac.db
+      # Behind Caddy on a stable domain now, not a Cloudflare quick tunnel —
+      # this overrides whatever's in .env.local. data/tunnel-url.txt (if
+      # present) would still take priority in bot code, so it's removed.
+      PUBLIC_BASE_URL: https://tasmac.reclaimchennai.city
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+
+networks:
+  web:
+    external: true
